@@ -8,7 +8,6 @@ import logo from '../../assets/react.svg';
 const Sidebar = ({showSideBar, setShowSideBar}) => {
     const {navLinks} = NavigationLinks();
 
-
     return (
         <div
             className={`fixed left-0 top-0 z-50 ${
