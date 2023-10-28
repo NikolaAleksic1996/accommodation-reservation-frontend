@@ -5,17 +5,16 @@ import NumberInput from "../input/NumberInput.jsx";
 
 const FilterAccommodation = ({onFilter}) => {
     const [filters, setFilters] = useState({
-        startDate: "2024-01-01",
-        endDate: "2024-01-02",
-        roomNumber: '',
-        price: '',
+        startDate: null,
+        endDate: null,
+        roomNumber: null,
+        price: null,
     });
 
-    console.log(filters)
     const handleFilterDateChange = (name, date) => {
         setFilters((prevFilters) => ({
             ...prevFilters,
-            [name]: formatDate(date ? date.toLocaleString() : "2024-01-01"),
+            [name]: formatDate(date ? date.toLocaleString() : null),
         }));
     };
     const handleFilterChange = (e) => {
@@ -38,7 +37,7 @@ const FilterAccommodation = ({onFilter}) => {
                     <DatePicker
                         dateFormat="yyyy-MM-dd"
                         className="block mt-1 dark:bg-gray-100 border-gray-300 rounded-md shadow-sm w-25 focus:border-indigo-500 focus:ring-indigo-500"
-                        selected={new Date(filters.startDate)}
+                        selected={filters.startDate ? new Date(filters.startDate) : null}
                         onChange={(date) => handleFilterDateChange("startDate", date)}
                         selectsStart
                         startDate={new Date(filters.startDate)}
@@ -51,7 +50,7 @@ const FilterAccommodation = ({onFilter}) => {
                     <DatePicker
                         dateFormat="yyyy-MM-dd"
                         className="block mt-1 dark:bg-gray-100 border-gray-300 rounded-md shadow-sm w-25 focus:border-indigo-500 focus:ring-indigo-500"
-                        selected={new Date(filters.endDate)}
+                        selected={filters.endDate ? new Date(filters.endDate) : null}
                         onChange={(date) => handleFilterDateChange('endDate', date)}
                         selectsEnd
                         startDate={new Date(filters.startDate)}
@@ -84,9 +83,9 @@ const FilterAccommodation = ({onFilter}) => {
                 <div className="flex flex-col">
                     <button
                         onClick={applyFilters}
-                        className="bg-blue-500 text-white font-medium p-2 rounded hover:bg-blue-600 mt-6"
+                        className="bg-blue-500 text-white font-medium p-2 rounded-e-2xl hover:bg-blue-600 mt-6"
                     >
-                        Apply Filters
+                        Search
                     </button>
                 </div>
             </div>

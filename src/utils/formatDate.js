@@ -1,6 +1,8 @@
-
 export function formatDate(dateString) {
 
+    if (!dateString) {
+        return null
+    }
     const inputDate = new Date(dateString);
 
     const year = inputDate.getFullYear();
