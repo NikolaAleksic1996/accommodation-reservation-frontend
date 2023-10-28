@@ -4,6 +4,7 @@ import Error from "./pages/Errors/Error.jsx";
 import GuestLayout from "./pages/Layouts/GuestLayout.jsx";
 import Accommodation from "./pages/Accommodation/Accommodation.jsx";
 import Home from "./pages/Home/Home.jsx";
+import SuccessReservation from "./pages/Accommodation/SuccessReservation.jsx";
 
 const router = createBrowserRouter([
     {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
             {
                 path: 'accommodation',
                 element: <Accommodation />,
+            },
+            {
+                path: 'success',
+                element: <SuccessReservation />,
             },
         ],
     },

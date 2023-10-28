@@ -2,11 +2,11 @@ import {useState} from "react";
 import {Amenities} from "../../../enums/Amenities.ts";
 import {returnPricePerNight} from "../../../utils/calculations/returnPricePerNight.js";
 
-const AccommodationCard = ({data, addedFilterDateRange}) => {
+const AccommodationCard = ({data, addedFilterDateRange, roomNumber, setReservation}) => {
     const [isExpanded, setExpanded] = useState(false);
 
     const handleReserve = () => {
-        console.log('reserve')
+        setReservation(data)
     }
 
     return (
@@ -19,7 +19,7 @@ const AccommodationCard = ({data, addedFilterDateRange}) => {
                         {data.beachDistanceInMeters ? "Beach distance: " + data.beachDistanceInMeters + 'm' : null}
                     </p>
                     <p className="text-gray-700 text-base">
-                        {"Available rooms: " + data.capacity}
+                        {"Room capacity: " + data.capacity}
                     </p>
                 </div>
                 <div className="px-6 pt-4 pb-2">
@@ -107,7 +107,6 @@ const AccommodationCard = ({data, addedFilterDateRange}) => {
                                     Please select the dates of your stay
                                     to be able to see the exact price and book the accommodation.
                                 </div>
-                                {console.log(data)}
                             </>}
                         </>
                     )}

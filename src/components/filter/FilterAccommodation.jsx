@@ -2,6 +2,7 @@ import {useState} from "react";
 import DatePicker from "react-datepicker"
 import {formatDate} from "../../utils/formatDate.js";
 import NumberInput from "../input/NumberInput.jsx";
+import { addDays } from 'date-fns';
 
 const FilterAccommodation = ({onFilter}) => {
     const [filters, setFilters] = useState({
@@ -16,6 +17,12 @@ const FilterAccommodation = ({onFilter}) => {
             ...prevFilters,
             [name]: formatDate(date ? date.toLocaleString() : null),
         }));
+        if (name === 'startDate' && date >= new Date(filters.endDate)) {
+            setFilters((prevFilters) => ({
+                ...prevFilters,
+                endDate: null,
+            }));
+        }
     };
     const handleFilterChange = (e) => {
         const {name, value} = e.target;
@@ -31,12 +38,12 @@ const FilterAccommodation = ({onFilter}) => {
 
     return (
         <div className="bg-white p-4 rounded shadow">
-            <div className="mb-4 flex space-x-4 gap-3 justify-center items-center">
-                <div className="flex flex-col">
+            <div className="mb-4 flex space-x-4 gap-3 justify-center items-center flex-col sm:flex-row md:flex-row lg:flex-row ">
+                <div className="flex ms-4 flex-col sm:w-auto md:w-auto lg:w-auto">
                     <label className="text-sm font-medium mb-2">Date from</label>
                     <DatePicker
                         dateFormat="yyyy-MM-dd"
-                        className="block mt-1 dark:bg-gray-100 border-gray-300 rounded-md shadow-sm w-25 focus:border-indigo-500 focus:ring-indigo-500"
+                        className="block mt-1 dark:bg-gray-100 border-gray-300 rounded-md shadow-sm w-full sm:w-25 md:w-25 lg:w-25 focus:border-indigo-500 focus:ring-indigo-500"
                         selected={filters.startDate ? new Date(filters.startDate) : null}
                         onChange={(date) => handleFilterDateChange("startDate", date)}
                         selectsStart
@@ -45,45 +52,43 @@ const FilterAccommodation = ({onFilter}) => {
                         minDate={new Date("2024-01-01")}
                     />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col sm:w-auto md:w-auto lg:w-auto">
                     <label className="text-sm font-medium mb-2">Date to</label>
                     <DatePicker
                         dateFormat="yyyy-MM-dd"
-                        className="block mt-1 dark:bg-gray-100 border-gray-300 rounded-md shadow-sm w-25 focus:border-indigo-500 focus:ring-indigo-500"
+                        className="block mt-1 dark:bg-gray-100 border-gray-300 rounded-md shadow-sm w-full sm:w-25 md:w-25 lg:w-25 focus:border-indigo-500 focus:ring-indigo-500"
                         selected={filters.endDate ? new Date(filters.endDate) : null}
                         onChange={(date) => handleFilterDateChange('endDate', date)}
                         selectsEnd
                         startDate={new Date(filters.startDate)}
                         endDate={new Date(filters.endDate)}
-                        minDate={new Date(filters.startDate)}
+                        minDate={addDays(new Date(filters.startDate), 1)}
                     />
                 </div>
-                <div className="flex flex-col">
-                    <label className="text-sm font-medium mb-2">Room number</label>
+                <div className="flex flex-col sm:w-auto md:w-auto lg:w-auto">
+                    <label className="text-sm font-medium mb-2">Person number</label>
                     <NumberInput
                         id="roomNumber"
                         name="roomNumber"
                         value={filters.roomNumber || ''}
-                        isFocused={true}
                         onChange={(e) => handleFilterChange(e)}
                         required
                     />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col sm:w-auto md:w-auto lg:w-auto">
                     <label className="text-sm font-medium mb-2">Price in EUR</label>
                     <NumberInput
                         id="price"
                         name="price"
                         value={filters.price || ''}
-                        isFocused={true}
                         onChange={(e) => handleFilterChange(e)}
                         required
                     />
                 </div>
-                <div className="flex flex-col">
+                <div className="flex flex-col sm:w-auto md:w-auto lg:w-auto">
                     <button
                         onClick={applyFilters}
-                        className="bg-blue-500 text-white font-medium p-2 rounded-e-2xl hover:bg-blue-600 mt-6"
+                        className="bg-blue-500 text-white font-medium p-2 sm:rounded md:rounded-e-2xl lg:rounded-e-2xl hover:bg-blue-600 mt-6"
                     >
                         Search
                     </button>
