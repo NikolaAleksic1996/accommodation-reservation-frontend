@@ -1,5 +1,5 @@
 import {RouterProvider, createBrowserRouter} from 'react-router-dom';
-
+import "react-datepicker/dist/react-datepicker.css";
 import Error from "./pages/Errors/Error.jsx";
 import GuestLayout from "./pages/Layouts/GuestLayout.jsx";
 import Accommodation from "./pages/Accommodation/Accommodation.jsx";

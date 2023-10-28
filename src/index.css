@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.react-datepicker__input-container .react-datepicker__calendar-icon {
+    display: block;
+    padding-right: 10px !important;
+    width: 2em;
+    height: 2em;
+    top: calc(50% - 1em);
+}

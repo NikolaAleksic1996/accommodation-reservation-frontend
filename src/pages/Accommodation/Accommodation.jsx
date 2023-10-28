@@ -25,7 +25,7 @@ const Accommodation = () => {
                 onFilter={handleFilter}
             />
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3'>
-                {accommodation.map(el => { console.log(el.image)
+                {accommodation.map(el => {
                     return (
                         <AccommodationCard key={el.id} data={el}/>
                     )
