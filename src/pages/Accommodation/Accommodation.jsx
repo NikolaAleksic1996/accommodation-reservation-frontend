@@ -55,6 +55,8 @@ const Accommodation = () => {
     const handleReservation = (data, roomNumber) => {
         if (!roomNumber) {
             toast('Please select number of persons', {type: 'info'});
+        } else if(data.capacity < roomNumber) {
+            toast('Insufficient capacity', {type: 'error'});
         } else {
             setTitle(data.title)
             setReservation(true)
