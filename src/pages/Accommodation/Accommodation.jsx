@@ -58,6 +58,7 @@ const Accommodation = () => {
     }
 
     const handleReturnHome = () => {
+        getAccommodation()
         setReservation(false)
     }
     return reservation ? (

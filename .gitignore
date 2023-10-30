@@ -32,3 +32,4 @@ Thumbs.db
 # Unit test reports
 TEST*.xml
 .env
+.vercel
