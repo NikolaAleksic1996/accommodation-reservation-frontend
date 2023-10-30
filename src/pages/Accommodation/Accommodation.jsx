@@ -7,6 +7,8 @@ import {filterObjectsByCapacity} from "../../utils/filters/filterObjectsByCapaci
 import {filterObjectsByMaxPrice} from "../../utils/filters/filterObjectsByMaxPrice.js";
 import {areAllAttributesNull} from "../../utils/areAllAttributesNull.js";
 import SuccessReservation from "./SuccessReservation.jsx";
+import {toast, ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Accommodation = () => {
@@ -43,8 +45,6 @@ const Accommodation = () => {
         if (filter.roomNumber) {
             filteredAccommodations = filterObjectsByCapacity(filteredAccommodations, filter.roomNumber)
             setRoomNumber(filter.roomNumber)
-        } else {
-            setRoomNumber(1)
         }
         if (filter.price) {
             filteredAccommodations = filterObjectsByMaxPrice(filteredAccommodations, filter.price)
@@ -52,15 +52,22 @@ const Accommodation = () => {
         setAccommodation(filteredAccommodations)
     }
 
-    const handleReservation = (data) => {
-        setTitle(data.title)
-        setReservation(true)
+    const handleReservation = (data, roomNumber) => {
+        if (!roomNumber) {
+            toast('Please select number of persons', {type: 'info'});
+        } else {
+            setTitle(data.title)
+            setReservation(true)
+        }
     }
 
     const handleReturnHome = () => {
         getAccommodation()
         setReservation(false)
+        setAddedFilterDateRange(null)
+        setRoomNumber(null)
     }
+
     return reservation ? (
         <SuccessReservation
             title={title}
@@ -70,8 +77,21 @@ const Accommodation = () => {
         />
     ) : (
         <div className='mt-[30px] gap-5'>
+            <ToastContainer
+                position="top-right"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             <FilterAccommodation
                 onFilter={handleFilter}
+                handleRoomNumber={(number) => setRoomNumber(number)}
             />
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3'>
                 {accommodation.map(el => {

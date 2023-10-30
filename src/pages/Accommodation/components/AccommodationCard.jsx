@@ -6,7 +6,7 @@ const AccommodationCard = ({data, addedFilterDateRange, roomNumber, setReservati
     const [isExpanded, setExpanded] = useState(false);
 
     const handleReserve = () => {
-        setReservation(data)
+        setReservation(data, roomNumber)
     }
 
     return (

@@ -4,7 +4,7 @@ import {formatDate} from "../../utils/formatDate.js";
 import NumberInput from "../input/NumberInput.jsx";
 import { addDays } from 'date-fns';
 
-const FilterAccommodation = ({onFilter}) => {
+const FilterAccommodation = ({onFilter, handleRoomNumber}) => {
     const [filters, setFilters] = useState({
         startDate: null,
         endDate: null,
@@ -30,6 +30,9 @@ const FilterAccommodation = ({onFilter}) => {
             ...prevFilters,
             [name]: value,
         }));
+        if(name === 'roomNumber') {
+            handleRoomNumber(value)
+        }
     };
 
     const applyFilters = () => {
@@ -76,7 +79,7 @@ const FilterAccommodation = ({onFilter}) => {
                     />
                 </div>
                 <div className="flex flex-col sm:w-auto md:w-auto lg:w-auto">
-                    <label className="text-sm font-medium mb-2">Price in EUR</label>
+                    <label className="text-sm font-medium mb-2">Price per night in EUR</label>
                     <NumberInput
                         id="price"
                         name="price"
